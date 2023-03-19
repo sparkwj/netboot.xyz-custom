@@ -8,10 +8,8 @@ clear custom_choice
 menu This is a Test Menu
 item --gap This is the first sub menu
 item option_one ${space} Loading a kernel and initrd
-item option_two ${space} Loading an ISO
-item --gap This is a second sub menu
-item option_three ${space} Loads another custom sub menu
-item option_four ${space} This is option four
+item option_two ${space} Loading a kernel and initrd
+item Alpine_linux ${space} Boot Alpine Linux online
 choose custom_choice || goto custom_exit
 echo ${cls}
 goto ${custom_choice}
@@ -28,9 +26,9 @@ kernel https://boot.netboot.xyz/memdisk raw iso
 initrd http://path.to/iso
 boot || goto custom_exit
 
-:option_three
-echo Chains into another menu...
-chain https://raw.githubusercontent.com/${github_user}/netboot.xyz-custom/master/custom1.ipxe || goto custom
+:Alpine_linux
+echo Alpine Linux netboot ...
+chain https://boot.alpinelinux.org/boot.ipxe || goto custom
 
 :custom_exit
 chain utils.ipxe
